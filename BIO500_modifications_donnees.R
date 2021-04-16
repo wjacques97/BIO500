@@ -19,16 +19,16 @@ Teamdefeunoeuds<-read.table("Teamdefeu_noeuds.csv", header=T, sep=";",stringsAsF
 Vachonnoeuds<-read.table("Vachon_etal_noeuds.csv", header=T, sep=";")
 
 #Standardisation des noms de colonnes
-colnames(Merielcollaborations)[colnames(Merielcollaborations) %in% c("?..etudiant1", "session")] <- c("etudiant1", "date")
-colnames(Teamdefeucollaborations)[colnames(Teamdefeucollaborations) %in% c("?..etudiant1")] <- c("etudiant1")
+colnames(Merielcollaborations)[colnames(Merielcollaborations) %in% c("ï..etudiant1", "session")] <- c("etudiant1", "date")
+colnames(Teamdefeucollaborations)[colnames(Teamdefeucollaborations) %in% c("ï..etudiant1")] <- c("etudiant1")
 colnames(Drouincollaborations)[colnames(Drouincollaborations) %in% c("session")] <- c("date")
-colnames(Teamdefeucours)[colnames(Teamdefeucours) %in% c("?..sigle")] <- c("sigle")
-colnames(Merielcours)[colnames(Merielcours) %in% c("?..sigle")] <- c("sigle")
+colnames(Teamdefeucours)[colnames(Teamdefeucours) %in% c("ï..sigle")] <- c("sigle")
+colnames(Merielcours)[colnames(Merielcours) %in% c("ï..sigle")] <- c("sigle")
 colnames(Drouincours)[colnames(Drouincours) %in% c("credit")] <- c("credits")
-colnames(Augercours)[colnames(Augercours) %in% c("?..sigle")] <- c("sigle")
+colnames(Augercours)[colnames(Augercours) %in% c("ï..sigle")] <- c("sigle")
 colnames(Drouinnoeuds)[colnames(Drouinnoeuds) %in% c("session")] <- c("session_debut")
-colnames(Merielnoeuds)[colnames(Merielnoeuds) %in% c("?..nom")] <- c("nom_prenom")
-colnames(Teamdefeunoeuds)[colnames(Teamdefeunoeuds) %in% c("?..nom_prenom")] <- c("nom_prenom")
+colnames(Merielnoeuds)[colnames(Merielnoeuds) %in% c("ï..nom")] <- c("nom_prenom")
+colnames(Teamdefeunoeuds)[colnames(Teamdefeunoeuds) %in% c("ï..nom_prenom")] <- c("nom_prenom")
 
 #Association de BIO500 avec les personnes dans le fichier noeuds de Auger
 augerBIO500<-unique(Augercollaborations_[c("etudiant1", "Participation.BIO500")])
@@ -47,7 +47,7 @@ Augernoeuds$nom_prenom[Augernoeuds$nom_prenom =="pelletier_karlphillipe"] <- "pe
 Teamdefeunoeuds$coop <- as.character(Teamdefeunoeuds$coop)
 Teamdefeunoeuds$coop[Teamdefeunoeuds$coop == "coop"] <- "1"
 #Correction de la valeur non-conforme de nom_prenom de l'?quipe Team de feu dans le fichier noeuds
-Teamdefeunoeuds$nom_prenom[Teamdefeunoeuds$nom_prenom =="lespérance_laurie"] <- "lesperance_laurie"
+Teamdefeunoeuds$nom_prenom[Teamdefeunoeuds$nom_prenom =="lespÃ©rance_laurie"] <- "lesperance_laurie"
 
 #Correction de la valeur non-conforme de etudiant1 de l'?quipe Auger et al. dans le fichier collaborations
 Augercollaborations$etudiant1[Augercollaborations$etudiant1=="pelletier_karlphillipe"] <- "pelletier_karlphilippe"
