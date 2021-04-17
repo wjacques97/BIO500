@@ -52,19 +52,20 @@ Teamdefeunoeuds$nom_prenom[Teamdefeunoeuds$nom_prenom =="lespÃ©rance_laurie"] 
 #Correction de la valeur non-conforme de etudiant1 de l'?quipe Auger et al. dans le fichier collaborations
 Augercollaborations$etudiant1[Augercollaborations$etudiant1=="pelletier_karlphillipe"] <- "pelletier_karlphilippe"
 
-#Correction de valeur pr?sentiel/distance dans Merielcours pour ECL603
+#Correction de valeur présentiel/distance dans Merielcours pour ECL603
 Merielcours<- within(Merielcours,presentiel[sigle=="ECL603"] <- (presentiel[sigle=="ECL603"]=1))
-#Correction de valeur pr?sentiel/distance dans Vachoncours pour ECL611 et ECL616
+#Correction de valeur présentiel/distance dans Vachoncours pour ECL611 et ECL616
 Vachoncours<- within(Vachoncours,presentiel[sigle=="ECL611"] <- (presentiel[sigle=="ECL611"]=1))
 Vachoncours<- within(Vachoncours,presentiel[sigle=="ECL616"] <- (presentiel[sigle=="ECL616"]=1))
-#Correction de valeur pr?sentiel/distance dans Teamdefeucours pour PSL105
+#Correction de valeur présentiel/distance dans Teamdefeucours pour PSL105
 Teamdefeucours<- within(Teamdefeucours,presentiel[sigle=="PSL105"] <- (presentiel[sigle=="PSL105"]=0))
-#Cr?ation des data frame de chaque type de document en assemblant les documents des ?quipes
+#Création des data frame de chaque type de document en assemblant les documents des ?quipes
 cours<-rbind(AABBBcours, Augercours, Drouincours, Merielcours, Teamdefeucours, Vachoncours)
 collaborations<-rbind(AABBBcollaborations, Augercollaborations, Drouincollaborations, Merielcollaborations, Teamdefeucollaborations, Vachoncollaborations)
 noeuds<-rbind(AABBBnoeuds, Augernoeuds, Drouinnoeuds, Merielnoeuds, Teamdefeunoeuds, Vachonnoeuds)
-#On d?cide de retirer les colonnes COOP
-#Noeuds pas corrig? mais remove NA et unique fait -> probl?me de + = coop de Ariane Gauthier
+#Changer le nom de colonne sigle pour cours dans le fichier cours
+colnames(cours)[colnames(cours) %in% c("sigle")] <- c("cours")
+#On décide de retirer les colonnes COOP
 noeuds<-noeuds[!is.na(noeuds$BIO500),]
 noeuds<-unique(noeuds[c("nom_prenom", "BIO500")])
 #Correction du nombre de cr?dits erronn? pour des cours
@@ -72,5 +73,15 @@ cours["49", 2] = 3
 cours["50", 2] = 2
 #Supression des doublons dans cours
 cours<-unique(cours)
-#Correction du tableau de collaboration global
-collaborations<-unique(collaborations)
+#Correction des cours avec une date inexistante dans collaborations
+collaborations$date [collaborations$date == "A21"]<- "A20"
+#Correction des observations non-uniques dans le tableau de collaborations global
+collaborations_unique <- duplicated(collaborations[,1:3], incomparables=F)
+collaborations <- subset(collaborations[,1:4], collaborations_unique==F)
+#Suppression des collaborations avec soi-même
+collaborations <- collaborations[rownames(collaborations)!="1207",] 
+collaborations <- collaborations[rownames(collaborations)!="1211",] 
+#Création des tableaux modifiés
+write.table(noeuds, file= "noeuds.csv")
+write.table(collaborations, file="collaborations.csv")
+write.table(cours, file="cours.csv")
