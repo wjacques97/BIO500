@@ -50,12 +50,33 @@ dbWriteTable(db, append = TRUE, name = "etudiants", value = bd_etudiants, row.na
 dbWriteTable(db, append = TRUE, name = "collaborations", value = bd_collaborations, row.names = FALSE)
 dbWriteTable(db, append = TRUE, name = "cours", value = bd_cours, row.names = FALSE)
 
-#Commande utile dbSendQuery(db,"DROP TABLE noeuds;")
+#Commande utiles
+#dbSendQuery(db,"DROP TABLE etudiants;")
+#dbSendQuery(db,"DROP TABLE collaborations;")
+#dbSendQuery(db,"DROP TABLE cours;")
 #dbDisconnect(db)
 
 #Requêtes
 
-#Figure 1 : Extraction des collaborations pré-covid et post-covid pour les gens avec ou sans BIO500
+#Figure 1 : Extraction des collaborations pré-covid et post-covid pour les étudiants avec ou sans BIO500
+
+#Requête avec BIO500
+sql_requete<- "SELECT nom_prenom
+FROM etudiants
+WHERE BIO500 like 1
+;"
+sqlavecBIO500<-dbGetQuery(db,sql_requete)
+head(sqlavecBIO500)
+
+#Requête sans BIO500
+sql_requete<- "SELECT nom_prenom
+FROM etudiants
+WHERE BIO500 like 0
+;"
+sqlsansBIO500<-dbGetQuery(db,sql_requete)
+head(sqlsansBIO500)
+
+#Figure 2 : Extraction des collaborations pré-covid et post-covid
 
 #Requête pré-covid
 sql_requete<- "SELECT etudiant1, etudiant2
@@ -65,8 +86,7 @@ OR         date like 'A18%'
 OR         date like 'H19%'
 OR         date like 'E19%'
 OR         date like 'A19%' 
-OR         date like 'H20%'
-OR etudiants.BIO500 like '1%';"
+OR         date like 'H20%';"
 testsql<-dbGetQuery(db,sql_requete)
 head(testsql)
 

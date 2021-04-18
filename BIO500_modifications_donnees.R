@@ -78,9 +78,17 @@ collaborations$date [collaborations$date == "A21"]<- "A20"
 #Correction des observations non-uniques dans le tableau de collaborations global
 collaborations_unique <- duplicated(collaborations[,1:3], incomparables=F)
 collaborations <- subset(collaborations[,1:4], collaborations_unique==F)
-#Suppression des collaborations avec soi-même
+#Suppression des collaborations avec soi-même et des collaborations avec NA
 collaborations <- collaborations[rownames(collaborations)!="1207",] 
 collaborations <- collaborations[rownames(collaborations)!="1211",] 
+collaborations <- collaborations[rownames(collaborations)!="36",] 
+collaborations <- collaborations[rownames(collaborations)!="187",] 
+#Correction des erreurs de nom dans collaborations
+collaborations$etudiant1 [collaborations$etudiant1 == "johannie_gagnon"]<- "gagnon_joannie"
+collaborations$etudiant2 [collaborations$etudiant2 == "johannie_gagnon"]<- "gagnon_joannie"
+collaborations$etudiant1 [collaborations$etudiant1 == "lespÃ©rance_laurie"]<- "lesperance_laurie"
+collaborations$etudiant2 [collaborations$etudiant2 == "lespÃ©rance_laurie"]<- "lesperance_laurie"
+
 #Création des tableaux modifiés
 write.table(noeuds, file= "noeuds.csv")
 write.table(collaborations, file="collaborations.csv")
