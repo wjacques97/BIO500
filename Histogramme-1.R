@@ -17,12 +17,12 @@ degprecov <- apply(amprecov, 2, sum) + apply(amprecov, 1, sum)
 # Le rang pour chaque noeud
 rkprecov<-rank(degprecov)
 # Faire un code de couleur
-col.vec.precov<-heat.colors(87)
+col.vec.precov<-rev(heat.colors(87))
 # Attribuer aux noeuds la couleur
 V(precov)$color = col.vec.precov[rkprecov]
 
 plot(precov, vertex.label=NA, edge.arrow.mode = 0,
-     vertex.frame.color = NA, layout=layout.kamada.kawai(precov))
+     vertex.frame.color = "black", layout=layout.kamada.kawai(precov))
 
 #Reseau post-covid
 respostcov<-function() {
@@ -40,14 +40,9 @@ degpostcov <- apply(ampostcov, 2, sum) + apply(ampostcov, 1, sum)
 # Le rang pour chaque noeud
 rkpostcov<-rank(degpostcov)
 # Faire un code de couleur
-col.vec.postcov<-heat.colors(50)
+col.vec.postcov<-rev(heat.colors(50))
 # Attribuer aux noeuds la couleur
 V(postcov)$color = col.vec.postcov[rkpostcov]
 
-#TEST BIO500
-name.bio500.vec<- c(sqlavecBIO500)
-name.sansbio500.vec<-c(sqlsansBIO500)
-
-
 plot(postcov, vertex.label=NA, edge.arrow.mode = 0,
-     vertex.frame.color = NA , layout=layout.kamada.kawai(postcov))
+     vertex.frame.color = "black" ,layout=layout.kamada.kawai(postcov))
