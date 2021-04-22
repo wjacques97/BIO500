@@ -124,8 +124,8 @@ ORDER BY nbcollab
 nb_collab_postcov<- dbGetQuery(db, requete_collab_postcov)
 head(nb_collab_postcov)
 
-#Requêtes figure 3
-
+##Requêtes figure 3
+#Collaborations entre étudiants pour les cours en présentiel
 requete_presentiel<-  "SELECT etudiant1,etudiant2
 FROM collaborations
 INNER JOIN cours ON collaborations.cours=cours.cours
@@ -133,6 +133,7 @@ WHERE presentiel LIKE 1;"
 presentiel<-dbGetQuery(db,requete_presentiel)
 head(presentiel)
 
+#Collaborations entre étudiants pour les cours en ligne
 requete_enligne<-  "SELECT etudiant1,etudiant2
 FROM collaborations
 INNER JOIN cours ON collaborations.cours=cours.cours
@@ -140,7 +141,7 @@ WHERE presentiel LIKE 0;"
 enligne<-dbGetQuery(db,requete_enligne)
 head(enligne)
 
-#Figure 4 : Histogramme des cours présentiel/en ligne pour pre/post covid
+##Figure 4 : Histogramme des cours présentiel/en ligne pour pre/post covid
 #cours pre-covid
 requete_coursprecov<-  "SELECT DISTINCT presentiel, cours.cours
 FROM collaborations
