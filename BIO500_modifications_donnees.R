@@ -1,4 +1,4 @@
-##Script servant à modifier les données dans les documents csv de chaque  équipe et à les combiner ensemble
+##Script servant à modifier et corriger les données dans les documents csv de chaque  équipe et à les combiner ensemble
 #Importation des fichiers
 AABBBcollaborations<-read.table("AABBB_collaborations.csv", header=T, sep=";")
 Augercollaborations_<-read.table("Auger_etal_collaborations.csv", header=T, sep=";")
