@@ -158,4 +158,4 @@ WHERE date like '%E20%' OR date LIKE '%A20%' OR date LIKE '%H21%';"
 courspostcov<-dbGetQuery(db,requete_courspostcov)
 head(courspostcov)
 ##Aller voir les scripts pour chacunes des figures : 1,2,3,4 et pour le tableau des liens de collaborations par étudiant
-##PLUS DE COURS EN PRE-COVID QUI NE NÉCESSITAIENT PAS DE TRAVAUX D'EQUIPE, CAR PlUS THEORIQUE AU DEPART
+##+ DE COURS EN PRE-COVID QUI NE NÉCESSITAIENT PAS DE TRAVAUX D'EQUIPE, CAR PlUS THEORIQUE AU DEPART
