@@ -1,9 +1,10 @@
+##Tableau 1 : Nombre absolu de collaborations par étudiant avant et depuis le début de la pandémie
 #Nombre de liens par étudiant 1
 Tab_nb_collab<-merge(nb_collab_precov,nb_collab_postcov,by="etudiant1")
 class(Tab_nb_collab)
 head(Tab_nb_collab)
 
-#Noms de colonnes
+#Changement des noms de colonnes
 colnames(Tab_nb_collab)[colnames(Tab_nb_collab) %in% c("etudiant1")] <- c("Étudiants")
 colnames(Tab_nb_collab)[colnames(Tab_nb_collab) %in% c("nbcollab.x")] <- c("Nombre de collaborations pré-covid")
 colnames(Tab_nb_collab)[colnames(Tab_nb_collab) %in% c("nbcollab.y")] <- c("Nombre de collaborations post-covid")
