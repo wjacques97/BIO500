@@ -1,3 +1,4 @@
+##Script servant à modifier les données dans les documents csv de chaque  équipe et à les combiner ensemble
 #Importation des fichiers
 AABBBcollaborations<-read.table("AABBB_collaborations.csv", header=T, sep=";")
 Augercollaborations_<-read.table("Auger_etal_collaborations.csv", header=T, sep=";")
@@ -93,3 +94,5 @@ collaborations$etudiant2 [collaborations$etudiant2 == "lespÃ©rance_laurie"]<- 
 write.table(noeuds, file= "noeuds.csv")
 write.table(collaborations, file="collaborations.csv")
 write.table(cours, file="cours.csv")
+
+##Voir le fichier Base de données r pour la suite
