@@ -1,7 +1,9 @@
+###Script de création de la base de données, de sa construction et des requêtes
+##Création de la base de données
 library(RSQLite)
 db<-dbConnect(SQLite(), dbname="./reseau.db")
 
-#Création tableau liste étudiants dans la base de données
+#Création du tableau étudiants dans la base de données
 
 etudiants_sql<- 'CREATE TABLE etudiants (
 nom_prenom VARCHAR(50),
@@ -12,7 +14,7 @@ PRIMARY KEY (nom_prenom)
 dbSendQuery(db,etudiants_sql) 
 dbListTables(db)
 
-#Création tableau liste collaborations dans la base de données
+#Création du tableau collaborations dans la base de données
 
 collaborations_sql<-'CREATE TABLE collaborations (
   etudiant1 VARCHAR(50),
@@ -27,7 +29,7 @@ collaborations_sql<-'CREATE TABLE collaborations (
 dbSendQuery(db,collaborations_sql)
 dbListTables(db)
 
-#Création tableau cours dans la base de données
+#Création du tableau cours dans la base de données
 
 cours_sql<- 'CREATE TABLE cours (
   cours CHAR(6),
@@ -44,38 +46,20 @@ bd_etudiants<-read.table(file = "noeuds.csv")
 bd_collaborations<-read.table(file ="collaborations.csv")
 bd_cours<-read.table(file = "cours.csv")
 
-# Injection des enregistrements dans la BD
+# Injection des données dans la BD
 dbWriteTable(db, append = TRUE, name = "etudiants", value = bd_etudiants, row.names = FALSE)
 dbWriteTable(db, append = TRUE, name = "collaborations", value = bd_collaborations, row.names = FALSE)
 dbWriteTable(db, append = TRUE, name = "cours", value = bd_cours, row.names = FALSE)
 
-#Commande utiles
+#Commandes utiles
 #dbSendQuery(db,"DROP TABLE etudiants;")
 #dbSendQuery(db,"DROP TABLE collaborations;")
 #dbSendQuery(db,"DROP TABLE cours;")
 #dbDisconnect(db)
 
-#Requêtes
+##Requêtes
 
-#Figure 1 : Extraction des collaborations pré-covid et post-covid pour les étudiants avec ou sans BIO500
-
-#Requête avec BIO500
-sql_requete<- "SELECT nom_prenom
-FROM etudiants
-WHERE BIO500 like 1
-;"
-sqlavecBIO500<-dbGetQuery(db,sql_requete)
-head(sqlavecBIO500)
-
-#Requête sans BIO500
-sql_requete<- "SELECT nom_prenom
-FROM etudiants
-WHERE BIO500 like 0
-;"
-sqlsansBIO500<-dbGetQuery(db,sql_requete)
-head(sqlsansBIO500)
-
-#Figures 1 et 2 : Extraction des collaborations pré-covid et post-covid
+##Figures 1 et 2 : Extraction des collaborations pré-covid et post-covid
 
 #Requête pré-covid
 sql_requete<- "SELECT etudiant1, etudiant2
@@ -140,7 +124,7 @@ ORDER BY nbcollab
 nb_collab_postcov<- dbGetQuery(db, requete_collab_postcov)
 head(nb_collab_postcov)
 
-#Requête figure 3
+#Requêtes figure 3
 
 requete_presentiel<-  "SELECT etudiant1,etudiant2
 FROM collaborations
@@ -172,5 +156,5 @@ INNER JOIN cours ON collaborations.cours=cours.cours
 WHERE date like '%E20%' OR date LIKE '%A20%' OR date LIKE '%H21%';"
 courspostcov<-dbGetQuery(db,requete_courspostcov)
 head(courspostcov)
-
+##Aller voir les scripts pour chacunes des figures : 1,2,3,4 et pour le tableau des liens de collaborations par étudiant
 ##PLUS DE COURS EN PRE-COVID QUI NE NÉCESSITAIENT PAS DE TRAVAUX D'EQUIPE, CAR PlUS THEORIQUE AU DEPART
