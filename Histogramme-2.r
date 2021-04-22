@@ -1,4 +1,4 @@
-install.packages("ggplot2")
+##Figure 2 : Histogramme comparatif du nombre de collaborations pour une même paire d'éudiants avant et depuis le début de la pandémie
 library(ggplot2)
 
 #Pr?-covid
