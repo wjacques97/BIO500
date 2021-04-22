@@ -48,11 +48,22 @@ V(postcov)$color = col.vec.postcov[rkpostcov]
 reseau_postcov<-plot(postcov, vertex.label=NA, edge.arrow.mode = 0,
                      vertex.frame.color = "black" ,layout=layout.kamada.kawai(postcov), main= "Reseau post-covid")
 
-#Combinaison des 2 graphiques
+#Combinaison des 2 reseaux
+par(mfrow=c(1,2))
+plot(precov, vertex.label=NA, edge.arrow.mode = 0,
+     vertex.frame.color = "black", layout=layout.kamada.kawai(precov))
+title("Réseau de collaborations entre étudiants avant la pandémie de COVID-19",cex.main=1.5,col.main="black")
+plot(postcov, vertex.label=NA, edge.arrow.mode = 0,
+     vertex.frame.color = "black" ,layout=layout.kamada.kawai(postcov))
+title("Réseau de collaborations entre étudiants depuis la pandémie de COVID-19" ,cex.main=1.5,col.main="black")
+
+#Enregistrement de la figure 1 en pdf
+pdf("reseaux_comparaison.pdf", height=10, width=20)
 par(mfrow=c(1,2))
 plot(precov, vertex.label=NA, edge.arrow.mode = 0,
                     vertex.frame.color = "black", layout=layout.kamada.kawai(precov))
-title("Réseau de collaborations entre étudiants avant la pandémie de COVID-19",cex.main=0.85,col.main="black")
+title("Réseau de collaborations entre étudiants avant la pandémie de COVID-19",cex.main=1.5,col.main="black")
 plot(postcov, vertex.label=NA, edge.arrow.mode = 0,
      vertex.frame.color = "black" ,layout=layout.kamada.kawai(postcov))
-title("Réseau de collaborations entre étudiants depuis la pandémie de COVID-19" ,cex.main=0.85,col.main="black")
+title("Réseau de collaborations entre étudiants depuis la pandémie de COVID-19" ,cex.main=1.5,col.main="black")
+dev.off()
