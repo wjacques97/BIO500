@@ -7,7 +7,7 @@ nb_collab_presentiel<-na.omit(presentiel)
 
 #Creation des vecteurs pour sp?cifier si les collaborations avaient eu lieu pre ou post-covid
 vecenligne<-data.frame(Legende=c(rep("En ligne", 4)))
-vecpresentiel<-data.frame(Legende=c(rep("Presentiel", 9)))
+vecpresentiel<-data.frame(Legende=c(rep("Présentiel", 9)))
 
 #En ligne
 nb_collab_enligne1<-data.frame(table(nb_collab_enligne[,1:2]))
@@ -40,10 +40,21 @@ enligne_presentiel1 <- enligne_presentiel %>% mutate(proportions = Collaboration
 #Graphique de proportion du nombre de collaborations entre deux personnes dans des cours en ligne vs presentiel
 p6 <-ggplot(enligne_presentiel1, aes(x=Collaborations.Var2, proportions, fill= Legende))+
   geom_bar(stat = "identity", width=0.5, position="dodge")+
-  labs(x="Nombre de fois que deux personnes ont collabore ensemble",
+  labs(x="Nombre de fois que deux personnes ont collaboré ensemble",
        y="Proportion du nombre de collaborations entre deux personnes",
-       title="Proportion du nombre collaborations entre deux personnes dans des cours en ligne vs en presentiel")+
+       title="Proportion du nombre de collaborations entre deux personnes dans des cours en ligne vs en présentiel")+
   theme(plot.title = element_text(hjust = 0.5))+
   scale_y_continuous(labels = scales::percent)
 #Sortie du graphique
 p6
+#Enregistrement de la figure 3 en pdf
+pdf("Histogramme3.pdf", height=10, width=20)
+ggplot(enligne_presentiel1, aes(x=Collaborations.Var2, proportions, fill= Legende))+
+  geom_bar(stat = "identity", width=0.5, position="dodge")+
+  labs(x="Nombre de fois que deux personnes ont collaboré ensemble",
+       y="Proportion du nombre de collaborations entre deux personnes",
+       title="Proportion du nombre de collaborations entre deux personnes dans des cours en ligne vs en présentiel")+
+  theme(axis.text=element_text(size=15),
+        axis.title=element_text(size=15),legend.title = element_text(size=15),legend.text = element_text(size=14), plot.title = element_text(hjust = 0.5, size=20))+
+  scale_y_continuous(labels = scales::percent)
+dev.off()
