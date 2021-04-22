@@ -1,3 +1,4 @@
+##Figure 3 : Histogramme comparatif du nombre de collaborations pour une même paire d'éudiants dans les cours en ligne vs en présentiel
 library(ggplot2)
 library(dplyr)
 #Retrait des NA
