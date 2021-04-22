@@ -1,3 +1,4 @@
+##Figure 4 : Comparaison du nombre de cours en ligne et du nombre de cours en présentiel avant et depuis le début de la pandémie
 library(ggplot2)
 #Data frame de sp?cification du  moment o? les cours ont eu lieu
 veccourspre<-data.frame(Legende=c(rep("Pre-Covid", 16)))
