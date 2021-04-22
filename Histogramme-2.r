@@ -43,3 +43,15 @@ p55 <-ggplot(data_perc2, aes(Collaborations.Var2, proportions, fill=Légende))+
   scale_y_continuous(labels = scales::percent)
 #visualisation de l'histogramme
 p55
+
+#enregistrement de la figure 2 en pdf
+pdf("Histogramme2.pdf", height=10, width=20)
+ggplot(data_perc2, aes(Collaborations.Var2, proportions, fill=Légende))+
+geom_bar(stat = "identity", width=0.5, position="dodge")+
+  labs(x="Nombre de fois que deux personnes ont collaboré ensemble",
+       y="Proportion du nombre de collaborations entre deux personnes",
+       title="Comparaison du nombre de collaborations entre deux personnes pré- et post-Covid")+
+  theme(axis.text=element_text(size=15),
+        axis.title=element_text(size=15),legend.title = element_text(size=15),legend.text = element_text(size=14), plot.title = element_text(hjust = 0.5, size=20))+
+  scale_y_continuous(labels = scales::percent)
+dev.off()
