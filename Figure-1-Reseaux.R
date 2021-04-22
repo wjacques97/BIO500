@@ -1,3 +1,4 @@
+##Figure 1 : construction des réseaux de collaborations pré et post-covid pour les étudiants de BIO500 et leurs autres collaborateurs
 library(igraph)
 
 #Reseau pre-covid
