@@ -19,7 +19,6 @@ Merielnoeuds<-read.table("Meriel_etal_noeuds.csv", header=T, sep=";")
 Teamdefeunoeuds<-read.table("Teamdefeu_noeuds.csv", header=T, sep=";",stringsAsFactors = F)
 Vachonnoeuds<-read.table("Vachon_etal_noeuds.csv", header=T, sep=";")
 
-
 #Standardisation des noms de colonnes
 colnames(Merielcollaborations)[colnames(Merielcollaborations) %in% c("etudiant1", "session")] <- c("etudiant1", "date")
 colnames(Teamdefeucollaborations)[colnames(Teamdefeucollaborations) %in% c("etudiant1")] <- c("etudiant1")
