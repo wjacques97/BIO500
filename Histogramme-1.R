@@ -20,9 +20,9 @@ rkprecov<-rank(degprecov)
 col.vec.precov<-rev(heat.colors(87))
 # Attribuer aux noeuds la couleur
 V(precov)$color = col.vec.precov[rkprecov]
-
-plot(precov, vertex.label=NA, edge.arrow.mode = 0,
-     vertex.frame.color = "black", layout=layout.kamada.kawai(precov))
+#Representation du reseau raffine pre-covid
+reseau_precov<-plot(precov, vertex.label=NA, edge.arrow.mode = 0,
+     vertex.frame.color = "black", layout=layout.kamada.kawai(precov), main="Reseau pre-covid")
 
 #Reseau post-covid
 respostcov<-function() {
@@ -43,6 +43,15 @@ rkpostcov<-rank(degpostcov)
 col.vec.postcov<-rev(heat.colors(50))
 # Attribuer aux noeuds la couleur
 V(postcov)$color = col.vec.postcov[rkpostcov]
+#Representation du graphique raffine post-covid
+reseau_postcov<-plot(postcov, vertex.label=NA, edge.arrow.mode = 0,
+                     vertex.frame.color = "black" ,layout=layout.kamada.kawai(postcov), main= "Reseau post-covid")
 
+#Combinaison des 2 graphiques
+par(mfrow=c(1,2))
+plot(precov, vertex.label=NA, edge.arrow.mode = 0,
+                    vertex.frame.color = "black", layout=layout.kamada.kawai(precov))
+title("Réseau de collaborations entre étudiants avant la pandémie de COVID-19",cex.main=0.85,col.main="black")
 plot(postcov, vertex.label=NA, edge.arrow.mode = 0,
      vertex.frame.color = "black" ,layout=layout.kamada.kawai(postcov))
+title("Réseau de collaborations entre étudiants depuis la pandémie de COVID-19" ,cex.main=0.85,col.main="black")
