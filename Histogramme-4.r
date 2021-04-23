@@ -19,7 +19,7 @@ coursprepost<-rbind(courspostcov1, coursprecov1)
 
 #Graphique du type de cours en fonction du moment o? ils ont eu lieu
 p7<-ggplot(coursprepost, aes(presentiel, fill=Legende))+
-  geom_histogram(position="dodge", stat="count", binwidth=0.2)+
+  geom_histogram(position="dodge", width=0.5, stat="count", binwidth=0.2)+
   labs(x="Catégorie de cours",
        y="Nombre de cours de chaque catégorie",
        title="Comparaison du nombre de cours en ligne et présentiel avant et depuis le début de la pandémie")+
@@ -29,7 +29,7 @@ p7
 #Enregistrement de la figure 4 en pdf
 pdf("Histogramme4.pdf", height=10, width=20)
 ggplot(coursprepost, aes(presentiel, fill=Legende))+
-  geom_histogram(position="dodge", stat="count", binwidth=0.2)+
+  geom_histogram(position="dodge", width=0.5, stat="count", binwidth=0.2)+
   labs(x="Catégorie de cours",
        y="Nombre de cours de chaque catégorie",
        title="Comparaison du nombre de cours en ligne et présentiel avant et depuis le début de la pandémie")+
